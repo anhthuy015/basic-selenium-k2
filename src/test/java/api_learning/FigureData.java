@@ -1,11 +1,11 @@
 package api_learning;
 
-public class Lesson14 {
+public class FigureData {
     private String imgSrc;
     private String imgDesc;
     private String imgLink;
 
-    public Lesson14(String imgSrc, String imgDesc, String imgLink) {
+    public FigureData(String imgSrc, String imgDesc, String imgLink) {
         this.imgSrc = imgSrc;
         this.imgDesc = imgDesc;
         this.imgLink = imgLink;
@@ -19,7 +19,16 @@ public class Lesson14 {
         return imgDesc;
     }
 
-    public String getImgLink() {
+    public String imgLink() {
         return imgLink;
+    }
+
+    @Override
+    public String toString() {
+        return "Lesson14{" +
+                "imgSrc='" + imgSrc + '\'' +
+                ", imgDesc='" + imgDesc + '\'' +
+                ", imgLink='" + imgLink + '\'' +
+                '}';
     }
 }
