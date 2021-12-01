@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import url.Urls;
 
 import java.time.Duration;
+import java.util.List;
 
 public class lesson13 implements Urls {
     public static void main(String[] args) {
@@ -49,6 +50,16 @@ public class lesson13 implements Urls {
 
             //Wait a little
             Thread.sleep(3000);
+
+            //Example
+            List<WebElement> menuItemElems = driver.findElements(By.id("tao lao"));
+            if(menuItemElems.isEmpty())
+                throw new RuntimeException("menu is empty");
+            else {
+                menuItemElems.forEach(menuItem -> {
+                    System.out.println(menuItem.getText());
+                });
+            }
 
 
         } catch (InterruptedException e) {

@@ -4,48 +4,37 @@ import Driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import url.Urls;
 
 import java.time.Duration;
+import java.util.List;
 
-public class lesson13 implements Urls {
+public class lesson13_1 implements Urls {
     public static void main(String[] args) {
         WebDriver driver = DriverFactory.getChromeDriver();
 
         try{
             driver.get(baseUrl.concat(dynamicControlSlug));
 
-//            //Link text selector
-//            By powerByLinkSel = By.partialLinkText("Elemental");
-//            WebElement powerByLinkElem = driver.findElement(powerByLinkSel);
-//
-//            System.out.println("Link Text: " + powerByLinkElem.getText());
-//            System.out.println("Power by Href: " + powerByLinkElem.getAttribute("href"));
-//            System.out.println("LinkText target: " + powerByLinkElem.getAttribute("target"));
-//
-//            //Get current URL and Page title
-//            System.out.println("Current URL: " + driver.getCurrentUrl());
-//            System.out.println("Current page title: " + driver.getTitle());
-
             //wait Strategies
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            By btnSel = By.cssSelector("button");
 
-            By checkBoxExampleBtnSel = By.cssSelector("#checkbox-example button");
-            //Click on remove btn
-            driver.findElement(checkBoxExampleBtnSel).click();
+            // When has one button on 1 page
+//            WebElement btnElem = driver.findElement(btnSel);
+//            btnElem.click();
 
-            //wait a little| Wait until progress bar is NOT displayed
-            WebElement progressBar = driver.findElement(By.cssSelector("#loading"));
-            //By.id("loading")
-            //By.cssSelector("#loading")
-            //By.cssSelector("[id = 'loading']")
-            wait.until(ExpectedConditions.invisibilityOf(progressBar));//request->500ms
+            // When has more button on 1 page
+            List<WebElement> btnElems = driver.findElements(btnSel);
+            System.out.println("Size: " + btnElems.size());
+            final int CHECKBOX_EXAMPLE_BTN_INDEX = 0;
+            final int INPUT_EXAMPLE_BTN_INDEX = 1;
+            WebElement checkBoxExampleBtnElem = btnElems.get(CHECKBOX_EXAMPLE_BTN_INDEX);
+            WebElement inputBoxExampleBtnElem = btnElems.get(INPUT_EXAMPLE_BTN_INDEX);
 
-            //Click on add btn
-            driver.findElement(checkBoxExampleBtnSel).click();
-            wait.until(ExpectedConditions.invisibilityOf(progressBar));
+            checkBoxExampleBtnElem.click();
+            inputBoxExampleBtnElem.click();
 
             //Wait a little
             Thread.sleep(3000);

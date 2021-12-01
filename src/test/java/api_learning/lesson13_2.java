@@ -4,48 +4,40 @@ import Driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import url.Urls;
 
-import java.time.Duration;
+public class lesson13_2 implements Urls {
 
-public class lesson13 implements Urls {
+    private static final By inputFieldSel = By.cssSelector("input");
+    private static final By btnSel = By.cssSelector("button");
+
     public static void main(String[] args) {
         WebDriver driver = DriverFactory.getChromeDriver();
 
         try{
             driver.get(baseUrl.concat(dynamicControlSlug));
 
-//            //Link text selector
-//            By powerByLinkSel = By.partialLinkText("Elemental");
-//            WebElement powerByLinkElem = driver.findElement(powerByLinkSel);
-//
-//            System.out.println("Link Text: " + powerByLinkElem.getText());
-//            System.out.println("Power by Href: " + powerByLinkElem.getAttribute("href"));
-//            System.out.println("LinkText target: " + powerByLinkElem.getAttribute("target"));
-//
-//            //Get current URL and Page title
-//            System.out.println("Current URL: " + driver.getCurrentUrl());
-//            System.out.println("Current page title: " + driver.getTitle());
+            //1st Form | CHECKBOX example form
+            By checkboxExampleFormSel = By.cssSelector("#checkbox-example");
+            WebElement checkboxExampleFormElem = driver.findElement(checkboxExampleFormSel);
+            WebElement checkboxOption = checkboxExampleFormElem.findElement(inputFieldSel);
+            WebElement removeBtnElem = checkboxExampleFormElem.findElement(btnSel);
 
-            //wait Strategies
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            if(!checkboxOption.isSelected())
+                checkboxOption.click();
+            removeBtnElem.click();
 
-            By checkBoxExampleBtnSel = By.cssSelector("#checkbox-example button");
-            //Click on remove btn
-            driver.findElement(checkBoxExampleBtnSel).click();
+            //2nd Form | INPUT example form
+            By inputExampleFormSel = By.cssSelector("#input-example");
+            WebElement inputExampleFormElem = driver.findElement(inputExampleFormSel);
+            WebElement inputExampleInputFieldElem = inputExampleFormElem.findElement(inputFieldSel);
+            WebElement inputExampleBtnElem = inputExampleFormElem.findElement(btnSel);
+//            System.out.println(inputExampleInputFieldElem.isEnabled());
+//            System.out.println(inputExampleBtnElem.getText());
 
-            //wait a little| Wait until progress bar is NOT displayed
-            WebElement progressBar = driver.findElement(By.cssSelector("#loading"));
-            //By.id("loading")
-            //By.cssSelector("#loading")
-            //By.cssSelector("[id = 'loading']")
-            wait.until(ExpectedConditions.invisibilityOf(progressBar));//request->500ms
+            if(!inputExampleInputFieldElem.isEnabled())
+                inputExampleBtnElem.click();
 
-            //Click on add btn
-            driver.findElement(checkBoxExampleBtnSel).click();
-            wait.until(ExpectedConditions.invisibilityOf(progressBar));
 
             //Wait a little
             Thread.sleep(3000);
