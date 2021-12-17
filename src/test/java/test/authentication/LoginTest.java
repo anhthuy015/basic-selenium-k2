@@ -87,7 +87,8 @@ public class LoginTest implements Urls {
                 String actualFooterLink = loginPage.footerComp().footerLink();
                 String expectedFooterLink = "http://elementalselenium.com";
 
-                softAssert.assertEquals(actualFooterTexts,expectedFooterTexts);
+                boolean isFooterTextsCorrect = actualFooterTexts.equals(expectedFooterTexts);
+                softAssert.assertTrue(isFooterTextsCorrect,"[ERR] Powered By Texts incorrect");
                 softAssert.assertEquals(actualFooterLink,expectedFooterLink, "[ERR] Powered by link text incorrect");
 
                 System.out.println("hjshfk");
