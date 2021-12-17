@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 13.628 sec <<< FAILURE!
+loginWithIncorrectCreds(test.authentication.LoginTest)  Time elapsed: 1.026 sec  <<< FAILURE!
+java.lang.AssertionError: expected [Powered by Elemental Selenium.] but found [Powered by Elemental Selenium]
+	at org.testng.Assert.fail(Assert.java:99)
+	at org.testng.Assert.failNotEquals(Assert.java:1037)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:140)
+	at org.testng.Assert.assertEquals(Assert.java:122)
+	at org.testng.Assert.assertEquals(Assert.java:629)
+	at org.testng.Assert.assertEquals(Assert.java:639)
+	at test.authentication.LoginTest.loginWithIncorrectCreds(LoginTest.java:88)
+
