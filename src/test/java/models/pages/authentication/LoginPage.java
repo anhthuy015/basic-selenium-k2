@@ -1,4 +1,4 @@
-package models.pages;
+package models.pages.authentication;
 
 import models.components.global.FooterComponent;
 import org.openqa.selenium.By;

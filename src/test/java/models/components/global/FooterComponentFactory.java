@@ -3,24 +3,26 @@ package models.components.global;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class FooterComponent {
+public class FooterComponentFactory {
     private final WebDriver driver;
-    private static final By footerTextSel = By.id("page-footer");
-    private static final By footerLinkTextSel = By.cssSelector("#page-footer a");
+    @FindBy(id = "page-footer")
+    private  WebElement footerTextElem;
+    @FindBy(css = "#page-footer a")
+    private WebElement footerLinkTextElem;
 
-    public FooterComponent(WebDriver driver) {
+
+    public FooterComponentFactory(WebDriver driver) {
         this.driver = driver;
     }
-    public WebElement footerTextElem(){
-        return driver.findElement(footerTextSel);
-    }
+
     public String footerTexts() {
-        return driver.findElement(footerTextSel).getText();
+        return footerTextElem.getText();
     }
 
     public String footerLink() {
-        return driver.findElement(footerLinkTextSel).getAttribute("href");
+        return footerLinkTextElem.getAttribute("href");
     }
 
 

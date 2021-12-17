@@ -8,4 +8,5 @@ public interface Urls {
     String dropdownOptionPage = "/dropdown";
     String iFrame = "/iframe";
     String jsAlert ="/javascript_alerts";
+    String floatingPageSlug ="/floating_menu";
 }

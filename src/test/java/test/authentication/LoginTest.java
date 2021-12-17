@@ -2,7 +2,7 @@ package test.authentication;
 
 import Driver.DriverFactory;
 import models.components.global.FooterComponent;
-import models.pages.LoginPage;
+import models.pages.authentication.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import url.Urls;
@@ -22,16 +22,18 @@ public class LoginTest implements Urls{
         try {
             //Create new page model object
             LoginPage loginPage = new LoginPage(driver);
-            FooterComponent footerComponent = new FooterComponent(driver);
-            WebElement footerTextElem = footerComponent.footerTextElem();
+
             loginPage
                     .inputUsername(usernameStr)
                     .inputPassword(passwordStr)
                     .clickOnLoginBtn();
 
 //            login(driver, usernameStr, passwordStr);
+
+            System.out.println(loginPage.footerComp().footerTexts());
+            System.out.println(loginPage.footerComp().footerLink());
             Thread.sleep(2000);
-            System.out.println(footerTextElem.getText());
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

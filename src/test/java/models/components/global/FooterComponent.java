@@ -3,6 +3,7 @@ package models.components.global;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 public class FooterComponent {
     private final WebDriver driver;
@@ -11,6 +12,7 @@ public class FooterComponent {
 
     public FooterComponent(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver,this);
     }
     public WebElement footerTextElem(){
         return driver.findElement(footerTextSel);
