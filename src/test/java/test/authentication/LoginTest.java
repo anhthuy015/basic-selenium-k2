@@ -1,44 +1,103 @@
 package test.authentication;
 
 import Driver.DriverFactory;
-import models.components.global.FooterComponent;
-import models.pages.authentication.LoginPage;
+import models.pages.authentication.LoginPage;;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import url.Urls;
 
-public class LoginTest implements Urls{
+public class LoginTest implements Urls {
 
-    public static void main(String[] args) throws InterruptedException {
+    WebDriver driver = DriverFactory.getChromeDriver();
 
-        String usernameStr = "tomsmith";
-        String passwordStr = "SuperSecretPassword!";
+    @BeforeTest
+    public void beforeTest(){
+        System.out.println("LoginTest"+"| BeforeTest");
+    }
 
-        WebDriver driver = DriverFactory.getChromeDriver();
-        //Open target url
-        String loginUrl = baseUrl.concat(loginSlug);
-        driver.get(loginUrl);
+    @BeforeClass
+    public void beforeClass(){
+        System.out.println("LoginTest"+"| BeforeClass");
+    }
 
-        try {
-            //Create new page model object
-            LoginPage loginPage = new LoginPage(driver);
+    @BeforeMethod
+    public void openLoginPage(){
+        System.out.println("Login Test"+"| BeforeMethod");
+    }
 
-            loginPage
-                    .inputUsername(usernameStr)
-                    .inputPassword(passwordStr)
-                    .clickOnLoginBtn();
+//    @Test
+//    public void loginWithCorrectCreds() {
+//
+//        String usernameStr = "tomsmith";
+//        String passwordStr = "SuperSecretPassword!";
+//
+//        //Open target url
+//        String loginUrl = baseUrl.concat(loginSlug);
+//        driver.get(loginUrl);
+//
+//        try {
+//            //Create new page model object
+//            LoginPage loginPage = new LoginPage(driver);
+//
+//            loginPage
+//                    .inputUsername(usernameStr)
+//                    .inputPassword(passwordStr)
+//                    .clickOnLoginBtn();
+//
+////            login(driver, usernameStr, passwordStr);
+//
+//            System.out.println(loginPage.footerComp().footerTexts());
+//            System.out.println(loginPage.footerComp().footerLink());
+//            Thread.sleep(2000);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            //driver.quit()
+////            driver.quit();
+//        }
+//    }
+        @Test
+        public void loginWithIncorrectCreds() {
 
-//            login(driver, usernameStr, passwordStr);
+            String usernameStr = "tomsmith";
+            String passwordStr = "SuperSecretPassword!";
+            //Open target url
+            String loginUrl = baseUrl.concat(loginSlug);
+            driver.get(loginUrl);
 
-            System.out.println(loginPage.footerComp().footerTexts());
-            System.out.println(loginPage.footerComp().footerLink());
-            Thread.sleep(2000);
+            try {
+                //Create new page model object
+                LoginPage loginPage = new LoginPage(driver);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            //driver.quit()
-            driver.quit();
+                loginPage
+                        .inputUsername(usernameStr)
+                        .inputPassword(passwordStr)
+                        .clickOnLoginBtn();
+
+                //Verification
+                SoftAssert softAssert = new SoftAssert();
+                String actualFooterTexts = loginPage.footerComp().footerTexts();
+                String expectedFooterTexts = "Powered by Elemental Selenium.";
+                String actualFooterLink = loginPage.footerComp().footerLink();
+                String expectedFooterLink = "http://elementalselenium.com";
+
+                softAssert.assertEquals(actualFooterTexts,expectedFooterTexts);
+                softAssert.assertEquals(actualFooterLink,expectedFooterLink, "[ERR] Powered by link text incorrect");
+
+                System.out.println("hjshfk");
+
+                softAssert.assertAll();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                //driver.quit()
+                driver.quit();
+            }
         }
     }
-}
