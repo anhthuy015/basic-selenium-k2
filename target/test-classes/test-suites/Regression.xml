@@ -3,8 +3,8 @@
 <suite name="Regression" >
     <test name="authentication">
         <classes>
-<!--            <class name="test.authentication.LoginTest"/>-->
-            <class name="test.authentication.PriorityExplorer"/>
+            <class name="test.authentication.LoginTest"/>
+<!--            <class name="test.authentication.PriorityExplorer"/>-->
         </classes>
     </test>
 </suite>
